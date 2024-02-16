@@ -12,7 +12,8 @@ RUN cpan LWP::UserAgent && \
     cpan JSON && \
     cpan DBI && \
     cpan DBD::mysql && \
-    cpan IO::Socket::SSL
+    cpan IO::Socket::SSL && \
+    cpan Net::SSLeay
 
 # Specify the command to run on container startup
 CMD [ "perl", "./run_script.pl" ]
