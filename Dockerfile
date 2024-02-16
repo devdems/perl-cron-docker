@@ -1,19 +1,20 @@
 FROM alpine:latest
 
 # Install Perl and necessary build tools
-RUN apk add --no-cache perl perl-utils perl-dev build-base
+RUN apk upgrade && \
+    apk add --no-cache perl perl-utils perl-dev make gcc build-base openssl-dev && \
+    rm -rf /var/cache/apk/* 
 
 # Set the working directory
 WORKDIR /app
 
 # Install necessary Perl modules using CPAN
-RUN cpan LWP::UserAgent && \
-    cpan LWP::Protocol::https && \
-    cpan JSON && \
-    cpan DBI && \
-    cpan DBD::mysql && \
-    cpan IO::Socket::SSL && \
-    cpan Net::SSLeay
+RUN cpan -i LWP
+    cpan -i JSON && \
+    cpan -i DBI && \
+    cpan -i DBD && \
+    cpan -i IO && \
+    cpan -i Net
 
 # Specify the command to run on container startup
 CMD [ "perl", "./run_script.pl" ]
