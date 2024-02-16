@@ -9,7 +9,7 @@ RUN apk upgrade && \
 WORKDIR /app
 
 # Install necessary Perl modules using CPAN
-RUN cpan -i LWP
+RUN cpan -i LWP && \
     cpan -i JSON && \
     cpan -i DBI && \
     cpan -i DBD && \
